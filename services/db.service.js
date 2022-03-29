@@ -1,16 +1,14 @@
 const MongoClient = require("mongodb").MongoClient;
 
 const config = {
-  dbURL:
-    "mongodb+srv://noam:kasha123@noamcluster.sj9xo.mongodb.net/Dimerr?retryWrites=true&w=majority",
+  dbURL: process.env.MONGODB_URI,
 };
 
 module.exports = {
   getCollection,
 };
-
 // Database Name
-const dbName = "Dimerr";
+const dbName = "dimerr";
 
 var dbConn = null;
 
@@ -18,6 +16,7 @@ async function getCollection(collectionName) {
   try {
     const db = await connect();
     const collection = await db.collection(collectionName);
+    console.log('collection got!:', collectionName);
     return collection;
   } catch (err) {
     logger.error("Failed to get Mongo collection", err);
@@ -32,6 +31,7 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log(' process.env.MONGODB_URI:', config.dbURL);
     const db = client.db(dbName);
     dbConn = db;
     return db;

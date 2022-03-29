@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -6,7 +7,7 @@ const app = express();
 const http = require("http").createServer(app);
 
 const session = expressSession({
-  secret: "dimerr is amazing",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
