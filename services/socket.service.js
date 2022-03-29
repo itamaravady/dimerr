@@ -7,7 +7,7 @@ function connectSockets(http, session) {
     },
   });
   gIo.on("connection", (socket) => {
-    socket.on("disconnect", (socket) => {});
+    socket.on("disconnect", (socket) => { });
 
     socket.on("join", (room) => {
       socket.join(room);
